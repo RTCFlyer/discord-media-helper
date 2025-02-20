@@ -27,6 +27,22 @@ const commands = [
         .setDescription('The URL of a video on TikTok, Instagram, etc')
         .setRequired(true)
     )
+    .addStringOption((option) =>
+      option
+        .setName('format')
+        .setDescription('Format to download/convert to')
+        .setRequired(false)
+        .addChoices(
+          { name: 'Video (Best Quality)', value: 'video_best' },
+          { name: 'Video (1080p)', value: 'video_1080' },
+          { name: 'Video (720p)', value: 'video_720' },
+          { name: 'Video (480p)', value: 'video_480' },
+          { name: 'Audio (MP3)', value: 'audio_mp3' },
+          { name: 'Audio (M4A)', value: 'audio_m4a' },
+          { name: 'Audio (WAV)', value: 'audio_wav' },
+          { name: 'Audio (OGG)', value: 'audio_ogg' }
+        )
+    )
     .toJSON(),
 ];
 

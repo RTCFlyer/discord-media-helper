@@ -1,6 +1,6 @@
 import download from 'download';
 import got from 'got';
-import type { Handler, HandlerContext, ResolvedURL } from '../types.js';
+import type { Handler, HandlerContext, MediaType, ProcessedMedia, ResolvedURL } from '../types.js';
 import { tmpDir } from '../fs.js';
 import transcode from '../ffmpeg.js';
 import HandlerFlags from '../flags/handler.js';
@@ -20,6 +20,7 @@ const handler: Handler = {
         throw new Error('No video found');
       }
 
+      // TikTok is always video content
       const ext = context.options?.audioOnly
         ? context.options.audioFormat ?? 'mp3'
         : groups.ext ?? 'mp4';
@@ -30,7 +31,11 @@ const handler: Handler = {
         await transcode(fileName, context.options);
       }
 
-      return fileName;
+      return {
+        original: url.input,
+        file: fileName,
+        type: 'video' as MediaType
+      };
     } catch (error: unknown) {
       throw error instanceof Error ? error : new Error('Failed to process TikTok video');
     }

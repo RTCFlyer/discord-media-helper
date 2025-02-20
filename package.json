@@ -8,6 +8,7 @@
     "caddy": ".\\bin\\caddy.exe file-server --browse --root tmp",
     "cloudflared": ".\\bin\\cloudflared.exe tunnel run dmh",
     "dev": "ts-node src/",
+    "register": "ts-node scripts/commands.js",
     "watch": "concurrently \"tsc -w\" \"nodemon --delay 5 dist\"",
     "web": "concurrently \"npm:caddy\" \"npm:cloudflared\""
   },
